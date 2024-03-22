@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-UY">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculador de Presupuestos</title>
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!--CSS-->
     <link rel="stylesheet" href="css/style.css">
 </head>
-
-<body>
-    <div>
-        <!--Esta es una aplicación que se encargará de armar presupuestos de un electricista, 
+<!--Esta es una aplicación que se encargará de armar presupuestos de un electricista, 
         para que éste los pueda entregar a los clientes. 
-        El electricista cobra un valor fijo de $U 500 (doscientos pesos) por hora. 
-        Si utiliza un asistente, este asistente cobra $U 200 (ciento cincuenta pesos) por hora y trabaja la misma 
+        El electricista cobra un valor fijo de $U 500 (quinientos pesos) por hora. 
+        Si utiliza un asistente, este asistente cobra $U 200 (doscientos pesos) por hora y trabaja la misma 
         cantidad de horas y días que el electricista en caso de ser parte del proyecto. 
         Al costo que haya de compra de materiales, el electricista le agrega un 20% (veinte por ciento) por concepto de compra 
         y traslado de los materiales hasta el lugar de la obra.  
@@ -23,52 +24,63 @@
         y el costo total de materiales (ya trasladados a la obra).
         Va a permitir calcular el costo en USD (tomando en cuenta el valor 1USD = 40$UY)
         Al final va a imprimir detalladamente los gastos y el costo total.
-        
-        Para la segunda pre entrega se agrega la posibildiad de guardar presupuestos, ver el ultimo 
-        presupuesto guardado y ver en un listado todos los presupuestos 
-        guardados hasta el momento. 
-        Se agrega CSS (basico)
-    
-        Para la tercer pre engrega se  modifica "presupuesto" a objeto.
-        Se recoren las propiedades de dicho objeto para poder mostrar diferentes valores, se guarda el objeto en lista
+        ----------01/10/23----------
+        Se agrega la posibilidad de guardar presupuestos, ver el ultimo presupuesto guardado y ver en un listado 
+        todos los presupuestos guardados hasta el momento. 
+        Se agrega Bootstrap y CSS
+        Se  modifica "presupuesto" a objeto.
+        Se recorren las propiedades de dicho objeto para poder mostrar diferentes valores, se guarda el objeto en lista
         Se mejoran las validaciones tratando de disminuir los errores
-        Se agrega libreria
-        No se utiliza Json porque no es util guardar muchos presupuestos, se realizan muchos, habria que sobreescribirlos,
-        tampoco nos interesan demasiado los presupuestos guardados-->
-        <h1>Calculador de presupuestos:</h1>
-        <form>
-            <label for="txtValorUno">Horas a trabajar por día:</label>
-            <input type="text" id="txtValorUno" />
-            <br>
-            <label for="txtValorDos">Cantidad de dias a trabajar:</label>
-            <input type="text" id="txtValorDos" />
-            <br>
-            <label for="checkBox1">Trabajar con asistente</label>
-            <input type="checkbox" id="checkBox1" />
-            <br>
-            <label for="txtValorTres">Ingresar gasto en materiales:</label>
-            <input type="text" id="txtValorTres" />
-            <p>Por defecto el presupuesto se calcula en $UY </p>
-            <label for="checkBox2">Calcular presupuesto en USD</label>
-            <input type="checkbox" id="checkBox2" />
-            <br>
-            <input type="button" value="Calcular presupuesto" id="btn" class="button" />
-            <br>
-            <input type="button" value="Guardar presupuesto" id="btn2" class="button" />
-            <br>
-            <input type="button" value="Ver ultimo presupuesto guardado" id="btn3" class="button" />
-            <br>
-            <input type="button" value="Ver todos los presupuestos guardados" id="btn4" class="button" />
-            <br>
-            <div id="divMostrarResultado"></div>
+        No se utiliza Json porque no es util guardar muchos presupuestos, se realizan muchos, habría que 
+        sobrescribir, tampoco nos interesan demasiado los presupuestos guardados-->
+
+<body class="p-3">
+    <header class="container-fluid">
+        <h1 class="fs-1">Calculador de presupuestos</h1>
+    </header>
+    <main class="container-fluid">
+        <form class="container">
+            <label for="txtValorUno" class="form-label fs-4">Horas a trabajar por día</label>
+            <input type="number" id="txtValorUno" min="1" placeholder="Numero" class="form-control w-25" required />
+            <label for="txtValorDos" class="form-label fs-4">Cantidad de días a trabajar</label>
+            <input type="number" id="txtValorDos" min="1" placeholder="Numero" class="form-control w-25" required />
+            <section>
+                <label for="checkBox1" class="form-check-label fs-4">Trabajar con asistente</label>
+                <input type="checkbox" id="checkBox1" class="form-check-input" />
+            </section>
+            <label for="txtValorTres" class="form-label fs-4">Gasto en materiales</label>
+            <input type="number" id="txtValorTres" min="1" placeholder="$UY" class="form-control w-25" required />
+            <p class="fs-4">Por defecto el presupuesto se calcula en $UY </p>
+            <section>
+                <label for="checkBox2" class="form-check-label fs-4">Calcular presupuesto en USD</label>
+                <input type="checkbox" id="checkBox2" class="form-check-input" />
+            </section>
+            <section>
+                <article>
+                    <input type="button" value="Calcular presupuesto" id="btn" class="btn btn-primary fs-4" />
+                    <input type="button" value="Guardar presupuesto" id="btn2" class="btn btn-secondary fs-4" />
+                </article>
+                <article>
+                    <input type="button" value="Ver ultimo presupuesto guardado" id="btn3" class="btn btn-info fs-4" />
+                </article>
+                <article>
+                    <input type="button" value="Ver todos los presupuestos guardados" id="btn4"
+                        class="btn btn-secondary fs-4" />
+                </article>
+            </section>
+            <div id="divMostrarResultado" class="fs-5"></div>
         </form>
-        <div id="divAutor">
-            <span>Creado por </span>
-            <a href="https://github.com/RodrigoSuarez47">Rodrigo Suarez</a>
-        </div>
-    </div>
+    </main>
+    <footer class="container-fluid">
+        <a href="https://github.com/RodrigoSuarez47">Rodrigo Suarez</a>
+    </footer>
+    <!--JS-->
     <script src="js/User Interface.js"></script>
     <script src="js/main.js"></script>
+    <!--Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
